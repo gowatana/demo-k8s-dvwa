@@ -1,24 +1,25 @@
 # Damn Vulnerable Web Application (DVWA) on k8s
 
-create namespce.
+1. create namespce.
 
 ```
 kubectl create ns demo
 ```
 
-create Deployment and Service LoadBalancer.
+2. create Deployment and Service LoadBalancer.
 
 ```
 kubectl -n demo apply -f dvwa.yml
 ```
 
-check resource status.
+3. check resource status.
 
 ```
 kubectl -n demo get all
 ```
 
-get address and port.  
+4. get address and port.
+
 default login: admin / password
 
 ```
@@ -29,7 +30,7 @@ $ kubectl -n demo get service dvwa-svc -o jsonpath='{.status.loadBalancer.ingres
 192.168.24.19:80
 ```
 
-delete dvwa.
+5. delete dvwa.
 
 ```
 kubectl delete ns demo
