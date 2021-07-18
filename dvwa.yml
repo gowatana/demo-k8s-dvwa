@@ -1,0 +1,36 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: dvwa-svc
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: dvwa
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dvwa
+spec:
+  replicas: 1
+  selector:
+     matchLabels:
+       app: dvwa
+  template:
+    metadata:
+      labels:
+        app: dvwa
+    spec:
+      containers:
+      - name: dvwa-web
+        image: vulnerables/web-dvwa
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          tcpSocket:
+            port: 80
